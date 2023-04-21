@@ -31,6 +31,7 @@ nav {
 
 .logo {
   height: 5.25rem;
+  stroke: #862e9c;
 }
 
 .login {
@@ -88,7 +89,7 @@ nav {
   gap: 2rem;
 
   /* NOTE This creates the fade in/out anumation */
-  opacity: 0;
+  /* opacity: 0; */
   transition: all 1s;
 }
 
