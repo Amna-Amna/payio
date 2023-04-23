@@ -28,6 +28,8 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+console.log(accounts);
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const labelWelcome = document.querySelector(".welcome");
 const labelDate = document.querySelector(".date");
@@ -57,7 +59,7 @@ const inputClosePin = document.querySelector(".form__input--pin");
 const displayMovements = function (movements) {
   containerMovements.innerHTML = "";
 
-  movements.forEach(function (mov, i) {
+  const movementsDescription = movements.map(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
     const html = `
@@ -71,5 +73,16 @@ const displayMovements = function (movements) {
 
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
+  movementsDescription();
 };
-displayMovements(account1.movements);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+  });
+};
+console.log(createUsernames(accounts.owner));
