@@ -28,7 +28,6 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
-console.log(accounts);
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const labelWelcome = document.querySelector(".welcome");
@@ -63,26 +62,22 @@ const displayMovements = function (movements) {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
     const html = `
-    <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${mov}€</div>
-    </div>
-  `;
+        <div class="movements__value">${mov}€</div>
+      </div>
+    `;
 
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
-  movementsDescription();
 };
 
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(" ")
-      .map((name) => name[0])
-      .join("");
-  });
+displayMovements(account1.movements);
+
+const calcDisplayBalance = function (acc) {
+  acc.balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
-console.log(createUsernames(accounts.owner));
+calcDisplayBalance(account1.movements);
