@@ -63,7 +63,7 @@ const displayMovements = function (movements) {
 
     const html = `
       <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
+        <div class="movements_type movements_type--${type}">${
       i + 1
     } ${type}</div>
         <div class="movements__value">${mov}€</div>
@@ -74,13 +74,22 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+const createUsernames = function (accs) {
+  return accs.forEach(function (acc) {
+    return (acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join(""));
+  });
+};
+createUsernames(accounts);
+console.log("uffofofofofof");
 
 const calcDisplayBalance = function (acc) {
   acc.balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${acc.balance}€`;
 };
-calcDisplayBalance(account1.movements);
 
 const calcDisplaySummary = function (movements) {
   const incomes = movements
@@ -104,8 +113,6 @@ const calcDisplaySummary = function (movements) {
   labelSumInterest.textContent = `${interest}€`;
 };
 
-calcDisplaySummary(account1.movements);
-
 const eurToUsd = 1.1;
 const totalDepositsUSD = movements
   .filter((mov) => mov > 0)
@@ -116,3 +123,13 @@ const totalDepositsUSD = movements
 console.log(totalDepositsUSD);
 
 console.log(movements);
+
+console.log("AMNA");
+
+const updateUI = function (acc) {
+  displayMovements(acc.movements);
+
+  calcDisplayBalance(acc);
+
+  calcDisplaySummary(acc);
+};
