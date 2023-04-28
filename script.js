@@ -133,3 +133,29 @@ const updateUI = function (acc) {
 
   calcDisplaySummary(acc);
 };
+
+let currentAccount;
+
+currentAccount = accounts[0];
+console.log(currentAccount);
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  console.log("hooo");
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    console.log("hii");
+    displayMovements(currentAccount.movements);
+    calcDisplayBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount.movements);
+    containerApp.style.opacity = 100;
+
+    updateUI(currentAccount);
+  }
+});
