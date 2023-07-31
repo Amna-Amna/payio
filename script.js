@@ -82,11 +82,6 @@ const formatMovementDate = function (date, locale) {
   if (daysPassed === 0) return "Today";
   if (daysPassed === 1) return "Yesterday";
   if (daysPassed <= 7) return `${daysPassed} days ago`;
-
-  // const day = `${date.getDate()}`.padStart(2, 0);
-  // const month = `${date.getMonth() + 1}`.padStart(2, 0);
-  // const year = date.getFullYear();
-  // return `${day}/${month}/${year}`;
   return new Intl.DateTimeFormat(locale).format(date);
 };
 
@@ -206,6 +201,11 @@ const startLogOutTimer = function () {
 
 let currentAccount, timer;
 
+const hideCardWhenLoggedIn = function () {
+  const cardElement = document.querySelector(".card");
+  cardElement.style.opacity = 0;
+};
+
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
 
@@ -215,6 +215,7 @@ btnLogin.addEventListener("click", function (e) {
   console.log(currentAccount);
 
   if (currentAccount?.pin === +inputLoginPin.value) {
+    hideCardWhenLoggedIn();
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(" ")[0]
     }`;
@@ -243,6 +244,8 @@ btnLogin.addEventListener("click", function (e) {
     updateUI(currentAccount);
   }
 });
+
+
 
 btnTransfer.addEventListener("click", function (e) {
   e.preventDefault();
